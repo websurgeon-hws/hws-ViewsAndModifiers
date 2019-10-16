@@ -5,26 +5,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var exampleText = "nunquam titillandus"
-
-    let motto1 = Text("Draco dormiens")
-
-    // not allowed to create one stored property that
-    // refers to another stored property
-    //
-    // e.g. let motto2 = TextField("example1", text: $exampleText)
-    //
-    // Instead you can use computed property
-
-    var motto2: some View { TextField("example", text: $exampleText) }
-
     var body: some View {
-        VStack {
-            motto1
-                .foregroundColor(.red)
-            motto2
-                .foregroundColor(.blue)
+        VStack(spacing: 10) {
+            CapsuleText(text: "First")
+            CapsuleText(text: "Second")
         }
+    }
+}
+
+struct CapsuleText: View {
+    var text: String
+    
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .clipShape(Capsule())
     }
 }
 
