@@ -5,29 +5,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var useRedText = false
+    @State private var exampleText = "nunquam titillandus"
+
+    let motto1 = Text("Draco dormiens")
+
+    // not allowed to create one stored property that
+    // refers to another stored property
+    //
+    // e.g. let motto2 = TextField("example1", text: $exampleText)
+    //
+    // Instead you can use computed property
+
+    var motto2: some View { TextField("example", text: $exampleText) }
 
     var body: some View {
-        VStack(spacing: 40) {
-            VStack {
-                Text("Gryffindor")
-                    .font(.largeTitle) // overrides VStack environment modifier
-                Text("Hufflepuff")
-                Text("Ravenclaw")
-                Text("Slytherin")
-            }
-            .font(.title) // environment modifier
-            
-            VStack {
-                Text("Gryffindor")
-                    .blur(radius: 0) // adds additional modifier
-                // and so does not remove blur from this Text!
-                
-                Text("Hufflepuff")
-                Text("Ravenclaw")
-                Text("Slytherin")
-            }
-            .blur(radius: 5) // regular modifier
+        VStack {
+            motto1
+                .foregroundColor(.red)
+            motto2
+                .foregroundColor(.blue)
         }
     }
 }
