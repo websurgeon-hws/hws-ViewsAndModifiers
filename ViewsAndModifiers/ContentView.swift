@@ -6,13 +6,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        GridStack(rows: 5, columns: 3) { row, column in
-            HStack {
-                Text("[")
-                Image(systemName: "\(row * 3 + column).circle")
-                Text(": R\(row), C\(column)")
-                Text("]")
+        VStack {
+            Text("A Title").prominentBlueTitle()
+            
+            GridStack(rows: 5, columns: 3) { row, column in
+                HStack {
+                    Text("[")
+                    Image(systemName: "\(row * 3 + column).circle")
+                    Text(": R\(row), C\(column)")
+                    Text("]")
+                }
             }
+            
+            Spacer()
         }
     }
 }
@@ -32,6 +38,20 @@ struct GridStack<Content: View>: View {
                 }
             }
         }
+    }
+}
+
+extension View {
+    func prominentBlueTitle() -> some View {
+        self.modifier(ProminentBlueTitleModifier())
+    }
+}
+
+struct ProminentBlueTitleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
     }
 }
 
